@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Host/">
+    <Project Path="src/Host/RozetkaClone.Api/RozetkaClone.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Catalog/">
+    <Project Path="src/Modules/Catalog/RozetkaClone.Modules.Catalog.Application/RozetkaClone.Modules.Catalog.Application.csproj" />
+    <Project Path="src/Modules/Catalog/RozetkaClone.Modules.Catalog.Domain/RozetkaClone.Modules.Catalog.Domain.csproj" />
+    <Project Path="src/Modules/Catalog/RozetkaClone.Modules.Catalog.Infrastructure/RozetkaClone.Modules.Catalog.Infrastructure.csproj" />
+  </Folder>
+</Solution>
