@@ -1,10 +1,18 @@
+using RozetkaClone.Modules.Catalog.Application;
+using RozetkaClone.Modules.Catalog.Infrastructure;
+
 using Microsoft.EntityFrameworkCore;
-using RozetkaClone.Modules.Catalog.Infrastructure.Persistence;  
+using RozetkaClone.Modules.Catalog.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add Catalog module services
+
+builder.Services.AddCatalogApplication();
+builder.Services.AddCatalogInfrastructure();
+
 builder.Services.AddDbContext<CatalogDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Databaseсв cdcd")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
 
 // Add services to the container.
 

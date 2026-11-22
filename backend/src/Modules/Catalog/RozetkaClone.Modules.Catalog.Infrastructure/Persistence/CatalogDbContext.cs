@@ -6,14 +6,12 @@ using RozetkaClone.Modules.Catalog.Domain.Entities;
 
 namespace RozetkaClone.Modules.Catalog.Infrastructure.Persistence;
 
-public class CatalogDbContext : DbContext
+public class CatalogDbContext(DbContextOptions<CatalogDbContext> options) : DbContext(options)
 {
-    public CatalogDbContext(DbContextOptions<CatalogDbContext> options) : base(options)
-    {
-    }
     public DbSet<Category> Categories => Set<Category>();
     public DbSet<Product> Products => Set<Product>();
     public DbSet<ProductImage> ProductImages => Set<ProductImage>();
+    public DbSet<Brand> Brands => Set<Brand>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

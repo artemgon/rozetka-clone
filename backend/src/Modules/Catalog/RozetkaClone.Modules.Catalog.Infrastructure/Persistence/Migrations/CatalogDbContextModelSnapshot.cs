@@ -23,6 +23,29 @@ namespace RozetkaClone.Modules.Catalog.Infrastructure.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("RozetkaClone.Modules.Catalog.Domain.Entities.Brand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LogoUrl")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Brands", "catalog");
+                });
+
             modelBuilder.Entity("RozetkaClone.Modules.Catalog.Domain.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -62,9 +85,8 @@ namespace RozetkaClone.Modules.Catalog.Infrastructure.Persistence.Migrations
                         .HasColumnType("jsonb")
                         .HasDefaultValue("{}");
 
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("BrandId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer");
@@ -86,10 +108,18 @@ namespace RozetkaClone.Modules.Catalog.Infrastructure.Persistence.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("Sku")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
                     b.Property<int>("StockQuantity")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
 
                     b.HasIndex("CategoryId");
 
@@ -133,11 +163,19 @@ namespace RozetkaClone.Modules.Catalog.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("RozetkaClone.Modules.Catalog.Domain.Entities.Product", b =>
                 {
+                    b.HasOne("RozetkaClone.Modules.Catalog.Domain.Entities.Brand", "Brand")
+                        .WithMany("Products")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("RozetkaClone.Modules.Catalog.Domain.Entities.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Brand");
 
                     b.Navigation("Category");
                 });
@@ -151,6 +189,11 @@ namespace RozetkaClone.Modules.Catalog.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("RozetkaClone.Modules.Catalog.Domain.Entities.Brand", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("RozetkaClone.Modules.Catalog.Domain.Entities.Category", b =>
