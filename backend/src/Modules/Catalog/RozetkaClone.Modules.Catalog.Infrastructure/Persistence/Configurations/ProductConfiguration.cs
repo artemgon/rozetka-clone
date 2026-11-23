@@ -19,7 +19,13 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             .IsRequired()
             .HasMaxLength(250);
 
+        builder.Property(p => p.NameEn)
+            .HasMaxLength(250);
+
         builder.Property(p => p.Description)
+            .HasMaxLength(4000);
+
+        builder.Property(p => p.DescriptionEn)
             .HasMaxLength(4000);
 
         builder.Property(p => p.Sku)
@@ -41,7 +47,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             .HasMaxLength(30);
 
         builder.HasOne(p => p.Category)
-            .WithMany()
+            .WithMany(c => c.Products)
             .HasForeignKey(p => p.CategoryId)
             .OnDelete(DeleteBehavior.Restrict);
 

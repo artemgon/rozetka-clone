@@ -20,17 +20,6 @@ public class CatalogDbContext(DbContextOptions<CatalogDbContext> options) : DbCo
         // Tables and schemas setup
         modelBuilder.HasDefaultSchema("catalog");
 
-        // Category configuration
-        modelBuilder.Entity<Category>(entity =>
-        {
-            entity.HasKey(c => c.Id);
-            entity.Property(c => c.Name).IsRequired().HasMaxLength(150);
-            entity.HasOne(c => c.ParentCategory)
-                .WithMany(c => c.SubCategories)
-                .HasForeignKey(c => c.ParentCategoryId)
-                .OnDelete(DeleteBehavior.Restrict);
-        });
-
         // Product configuration
         modelBuilder.Entity<Product>(entity =>
         {

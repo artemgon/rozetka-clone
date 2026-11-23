@@ -8,7 +8,7 @@ namespace RozetkaClone.Modules.Catalog.Domain.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-
+        public string? NameEn { get; set; }
         public int? ParentCategoryId { get; set; }
         public Category? ParentCategory { get; set; }
         public ICollection<Category> SubCategories { get; set; } = [];

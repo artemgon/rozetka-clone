@@ -59,8 +59,10 @@ namespace RozetkaClone.Modules.Catalog.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("character varying(150)");
+                        .HasColumnType("text");
+
+                    b.Property<string>("NameEn")
+                        .HasColumnType("text");
 
                     b.Property<int?>("ParentCategoryId")
                         .HasColumnType("integer");
@@ -85,6 +87,9 @@ namespace RozetkaClone.Modules.Catalog.Infrastructure.Persistence.Migrations
                         .HasColumnType("jsonb")
                         .HasDefaultValue("{}");
 
+                    b.Property<double>("AverageRating")
+                        .HasColumnType("double precision");
+
                     b.Property<int>("BrandId")
                         .HasColumnType("integer");
 
@@ -97,16 +102,31 @@ namespace RozetkaClone.Modules.Catalog.Infrastructure.Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
+                    b.Property<string>("DescriptionEn")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsFeatured")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)");
+
+                    b.Property<string>("NameEn")
+                        .HasColumnType("text");
 
                     b.Property<decimal?>("OldPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ReviewsCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SalesCount")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Sku")
                         .HasColumnType("text");
@@ -155,8 +175,7 @@ namespace RozetkaClone.Modules.Catalog.Infrastructure.Persistence.Migrations
                 {
                     b.HasOne("RozetkaClone.Modules.Catalog.Domain.Entities.Category", "ParentCategory")
                         .WithMany("SubCategories")
-                        .HasForeignKey("ParentCategoryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ParentCategoryId");
 
                     b.Navigation("ParentCategory");
                 });

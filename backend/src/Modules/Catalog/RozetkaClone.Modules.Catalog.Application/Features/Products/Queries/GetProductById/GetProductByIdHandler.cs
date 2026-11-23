@@ -17,19 +17,25 @@ public class GetProductByIdHandler(IProductRepository productRepository) : IRequ
             return null;
         }
         return new ProductDto(
-            product.Id,
-            product.Name ?? string.Empty,
-            product.Description,
-            product.Sku ?? string.Empty,
-            product.Price,
-            product.OldPrice,
-            product.StockQuantity,
-            product.Status.ToString(),
-            product.BrandId,
-            product.Brand.Name,
-            product.CategoryId,
-            product.Category.Name,
-            product.AttributesJson,
-            product.CreatedAt);
+            Id: product.Id,
+            Name: product.Name ?? string.Empty,
+            NameEn: product.NameEn ?? string.Empty,
+            Description: product.Description,
+            DescriptionEn: product.DescriptionEn,
+            Sku: product.Sku ?? string.Empty,
+            Price: product.Price,
+            OldPrice: product.OldPrice,
+            StockQuantity: product.StockQuantity,
+            SalesCount: product.SalesCount,
+            IsFeatured: product.IsFeatured,
+            AverageRating: product.AverageRating,
+            ReviewsCount: product.ReviewsCount,
+            Status: product.Status.ToString(),
+            BrandId: product.BrandId,
+            BrandName: product.Brand.Name,
+            CategoryId: product.CategoryId,
+            CategoryName: product.Category.Name,
+            AttributesJson: product.AttributesJson,
+            CreatedAt: product.CreatedAt);
     }
 }

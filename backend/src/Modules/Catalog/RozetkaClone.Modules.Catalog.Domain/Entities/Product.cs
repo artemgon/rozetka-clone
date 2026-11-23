@@ -9,12 +9,20 @@ namespace RozetkaClone.Modules.Catalog.Domain.Entities
     {
         public int Id { get; set; }
         public string? Name { get; set; } = string.Empty;
+        public string? NameEn { get; set; } = string.Empty;
         public string? Description { get; set; } = string.Empty;
+        public string? DescriptionEn { get; set; } = string.Empty;
         public string? Sku { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public decimal? OldPrice { get; set; }
         public int StockQuantity { get; set; }
         public ProductStatus Status { get; set; } = ProductStatus.Active;
+
+        public double AverageRating { get; set; } 
+        public int ReviewsCount { get; set; }
+        public int SalesCount { get; set; }
+        public bool IsFeatured { get; set; } = false;
+
         public int BrandId { get; set; }
         public Brand Brand { get; set; } = null!;
 
